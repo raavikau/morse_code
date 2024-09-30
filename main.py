@@ -8,21 +8,33 @@ morse_dict = {
     ':': '---...', ';': '-.-.-.', '=': '-...-', '+': '.-.-.', '-': '-....-', '_': '..--.-', '"': '.-..-.',
     '$': '...-..-', '@': '.--.-.', ' ': '/'
 }
-user_choice = input('Choose an option: 1 Convert string to morse 2: Convert morse to string and 0: to quit\n')
-if user_choice == '1':
-    message = input('Enter your message want to convert to morse: ')
+def to_morse_code(string_message):
     morse_code = ''
-    for char in message.upper():
+    for char in string_message.upper():
         if char in morse_dict:
             morse_code += morse_dict[char] + ' '
-    print(morse_code)
-elif user_choice == '2':
-    morse_code = input('Enter your morse message want to convert to string')
+    return morse_code
+
+def from_morse_code(morse_code):
     string_message = ''
     for char in morse_code.split():
         for ch, value in morse_dict.items():
             if value == char:
                 string_message += ch
-    print(string_message)
-else:
-    print('invalid input')
+    return string_message
+
+while True:
+    user_choice = input('Choose an option 1: Convert string to morse, 2: Convert morse to string and 0: to quit \n')
+    if user_choice == '1':
+        message = input('Enter your message want to convert to morse: ')
+        encrypt_message = to_morse_code(message)
+        print(encrypt_message)
+    elif user_choice == '2':
+        morse_message = input('Enter your morse message want to convert to string: ')
+        decrypt_message = from_morse_code(morse_message)
+        print(decrypt_message)
+    elif user_choice == '0':
+        print('quit successfully')
+        break
+    else:
+        print('invalid input')
